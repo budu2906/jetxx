@@ -1,0 +1,430 @@
+@font-face {
+    // название шрифта(чтобы не запутаться лучше указать название папки со шрифтом) 
+    font-family: Reservation;
+    // адрес шрифта и тип 
+    src: url("../../../../../public/assets/Reservation\ Wide\ Black/Reservation Wide Black.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+.settings {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 12px;
+    padding: 12px 12px 16px;
+    position: relative;
+}
+
+.main {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 12px;
+    padding: 12px 12px 16px;
+    position: relative;
+    grid-area: make-bet;
+
+    @media (max-width:978px) {
+        grid-auto-flow: row;
+    }
+}
+
+.block {
+    position: relative;
+    display: grid;
+    grid-template-rows: 46px 91px;
+}
+
+.header {
+    min-height: 70px;
+    background: linear-gradient(90deg, rgb(31, 24, 61) 0%, rgb(38, 31, 77) 100%);
+    mix-blend-mode: normal;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 16px;
+    border-radius: 14px;
+    padding: 8px 10px 32px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: max-content max-content 1fr;
+    gap: 12px;
+
+    label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        font-family: Manrope;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 17px;
+        letter-spacing: 0px;
+        color: rgb(250, 250, 250);
+
+        input {
+            display: none;
+        }
+
+        div {
+            width: 26px;
+            height: 26px;
+            background: rgb(27, 21, 54);
+            border-radius: 8px;
+            display: grid;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            position: relative;
+
+            &::before {
+                display: block;
+                content: "";
+                border-radius: 7px;
+                width: 20px;
+                height: 20px;
+                background: none center center no-repeat rgb(38, 31, 77);
+            }
+        }
+    }
+
+    .not_active_label {
+        color: #8e8a9f;
+        pointer-events: none;
+
+        div {
+            background-color: #1e183c;
+
+            &::after {
+                background-color: none center center no-repeat #231d47;
+            }
+        }
+    }
+}
+
+.active_auto_bet {
+    div::after {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        content: "";
+        border-radius: 7px;
+        width: 20px;
+        height: 20px;
+        background: url('../../../../public//assets//main/gal.svg') center center no-repeat;
+    }
+}
+
+
+.footer {
+    background: linear-gradient(90deg, rgb(36, 29, 71) 0%, rgb(43, 35, 87) 100%);
+    mix-blend-mode: normal;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 24px;
+    border-radius: 14px;
+    padding: 10px 10px 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 71px;
+    gap: 8px;
+}
+
+.bet {
+    background: rgb(27, 21, 54);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    justify-self: end;
+    width: 100%;
+    max-width: 120px;
+
+    input {
+        font-family: Manrope;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 13px;
+        letter-spacing: 0px;
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-left: 12px;
+        opacity: 1;
+        transition: opacity 0.16s ease 0s;
+        box-shadow: transparent 0px 0px 0px 1000px inset;
+        transition: .32s;
+        color: rgb(250, 250, 250);
+    }
+}
+
+.unactive_bet {
+    background: rgb(27, 21, 54);
+    pointer-events: none;
+
+
+    input {
+        color: #8a8291;
+    }
+}
+
+.content {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    gap: 10px;
+    text-align: center;
+    color: transparent;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.16s ease 0s;
+
+    p:first-child {
+        color: rgb(148, 138, 197);
+    }
+
+}
+
+.bet_amount_controller {
+    background: rgb(27, 21, 54);
+    border-radius: 10px;
+    pointer-events: all;
+    transition: opacity 0.32s ease 0s;
+}
+
+.active_amount_controller {
+    .inc_btn {
+        pointer-events: none;
+        background-color: #1e183b;
+        color: #38325a
+    }
+
+    .input_controller {
+        font-family: Reservation;
+
+        input {
+            pointer-events: none;
+            color: #8d8a9b;
+        }
+
+        pointer-events: none;
+        color: #8d8a9b;
+    }
+}
+
+.input_controller {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 26px 1fr 26px;
+    border-bottom: 1px solid rgb(38, 31, 77);
+    grid-template-rows: 1fr;
+
+    button {
+        background: rgb(35, 29, 71);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition-duration: .32s;
+
+        &:hover {
+            background-color: #3b3270;
+        }
+    }
+}
+
+.input_controller_input {
+    position: relative;
+    width: 100%;
+    height: 26px;
+    display: flex;
+
+    input {
+        background: none;
+        border: none;
+        outline: none;
+        width: calc(100% + 25px);
+        min-width: 0px;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0px;
+        text-align: center;
+        color: white;
+        caret-color: white;
+        padding: 0px;
+    }
+}
+
+.overlay {
+    position: absolute;
+    left: 12.5px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0px;
+    text-align: center;
+    pointer-events: none;
+
+    p:first-child {
+        color: transparent;
+        opacity: 1;
+    }
+}
+
+.increment_btns {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    button {
+        border-radius: 8px;
+        flex: 1;
+        color: rgb(148, 138, 197);
+        min-width: 26px;
+        min-height: 24px;
+        background-color: rgb(35, 29, 71);
+        transition-duration: .32s;
+
+        font-family: Manrope;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 14px;
+        letter-spacing: 0px;
+        text-align: center;
+
+        &:hover {
+            background-color: #3b3270;
+        }
+    }
+}
+
+.bet_btn {
+    background: rgb(27, 21, 54);
+    border-radius: 14px;
+    height: 100%;
+    border: none;
+    padding: 3px;
+    position: relative;
+
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 101px;
+        height: 3px;
+        bottom: -10px;
+        left: calc(50% - 50.5px);
+        border-radius: 12px 12px 0px 0px;
+        background: linear-gradient(263.87deg, rgb(148, 78, 245) 0%, rgb(92, 36, 252) 100%);
+    }
+
+    .btn {
+        height: 100%;
+        width: 100%;
+        border-radius: 12px;
+        font-size: Inter;
+        font-weight: 600;
+        font-size: 15px;
+        font-style: normal;
+        line-height: 20px;
+        letter-spacing: 0.06em;
+        text-align: center;
+        color: rgb(250, 250, 250);
+        text-shadow: rgb(138, 138, 138) 0px 0px 20px;
+        display: grid;
+        -webkit-box-pack: center;
+        place-content: center;
+        grid-auto-rows: max-content;
+        text-transform: uppercase;
+        font-variant-numeric: tabular-nums;
+        background: linear-gradient(263.87deg, rgb(148, 78, 245) 0%, rgb(92, 36, 252) 100%);
+        box-shadow: rgba(25, 201, 245, 0.1) 0px 10px 20px, rgba(92, 36, 252, 0.1) 0px 10px 20px, rgb(148, 78, 245) 0px -2px 4px inset, rgba(148, 78, 245, 0.6) 0px -8px 8px inset;
+        cursor: pointer;
+
+        p {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .otmena {
+        background: linear-gradient(263.87deg, rgb(245, 78, 118) 0%, rgb(252, 36, 75) 100%);
+        box-shadow: rgba(245, 25, 65, 0.1) 0px 10px 20px, rgba(252, 36, 101, 0.1) 0px 10px 20px, rgb(245, 78, 118) 0px -2px 4px inset, rgba(245, 78, 128, 0.6) 0px -8px 8px inset;
+
+    }
+
+    .ojidanie {
+        background: transparent;
+        box-shadow: none;
+        color: #d0cfd8;
+        cursor: default;
+    }
+
+
+    .game {
+        background: linear-gradient(263.87deg, rgb(253, 187, 78) 0%, rgb(245, 103, 25) 100%);
+        box-shadow: rgba(253, 187, 78, 0.1) 0px 10px 20px, rgba(253, 187, 78, 0.1) 0px 10px 20px, rgb(253, 187, 78) 0px -2px 4px inset, rgba(253, 187, 78, 0.6) 0px -8px 8px inset;
+        cursor: pointer;
+    }
+}
+
+.ojidanie {
+    &::after {
+        display: none;
+
+    }
+}
+
+.otmena {
+    &::after {
+        background: linear-gradient(263.87deg, rgb(245, 78, 118) 0%, rgb(252, 36, 75) 100%);
+    }
+}
+
+.game {
+
+    &::after {
+
+        background: linear-gradient(263.87deg, rgb(253, 187, 78) 0%, rgb(245, 103, 25) 100%);
+    }
+}

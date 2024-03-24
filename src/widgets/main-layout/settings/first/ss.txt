@@ -1,0 +1,98 @@
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../../../store';
+import { decBalance } from '../../../../store/slices/userSlices/balanceSlice';
+
+const First = ({
+  s,
+  isFinish,
+  first,
+  isActiveMain,
+  firstController,
+  x,
+  setIsActiveClick,
+}: {
+  setIsActiveClick: (val: boolean) => void;
+  x: number;
+  s: any;
+  isFinish: boolean;
+  first: string;
+  isActiveMain: boolean;
+  firstController: number;
+}) => {
+  const [isActive, setIsActive] = useState({ state: false, data: { patt: '', bet: '', sum: 1.0 } });
+  const [isState, setIsState] = useState<'otmena' | 'ojidanie' | 'game'>('ojidanie');
+  const dispatch = useAppDispatch();
+  const [isWin, setIsWin] = useState(false);
+  let patt = { otmena: 'Отмена', ojidanie: 'Ожидание', game: 'Забрать' };
+
+  useEffect(() => {
+    console.log(x);
+    console.log(isActiveMain);
+    setIsActiveClick(isActive.state);
+    if (!isActiveMain) {
+      // ? есть экран загрузки и игра закончена
+      if (isActive.state) {
+        if (isState === 'game') {
+          setIsActive(prev => {
+            return {
+              ...prev,
+              state: false,
+            };
+          });
+        }
+        console.log('Ожидание');
+        setIsState('ojidanie');
+      }
+    } else {
+      // ? Если экран загрузки закрыт и игра началась
+      console.log('f');
+      if (isActive.state) {
+        // ? Если нажали
+        if (isState === 'ojidanie') {
+          // ? Если нажато когда загрузка
+          //   localStorage.setItem('bet1', JSON.stringify(isActive.data));
+          //   dispatch(decBalance(isActive.data.sum));
+          console.log('Игра началась, вы в ней учавствуете');
+          return setIsState('game');
+        }
+        if (isState === 'game') {
+          setIsState('ojidanie');
+          return setIsActive(prev => {
+            return {
+              ...prev,
+              state: false,
+            };
+          });
+        }
+        setIsState('otmena');
+        console.log('Отмена');
+      }
+    }
+  }, [isActiveMain, isActive, isWin, isFinish]);
+
+  //   useEffect(() => {
+  //     if (isActive.state) {
+  //       if (parseFloat(isActive.data.bet) === x) {
+  //         setIsWin(true);
+  //         console.log('Win ' + isActive.data.bet);
+  //       }
+  //     }
+  //   }, [x]);
+
+  const handleClick = (patt: string, el: string, sum: number) => {
+    if (isState === 'ojidanie' && isActive.state) {
+      return false;
+    }
+    setIsActive(prev => {
+      return { state: !prev.state, data: { patt, bet: el, sum } };
+    });
+  };
+
+  return (
+    <button onClick={() => handleClick('bet1', first, firstController)} className={`${isActive.state ? s[isState] : ''} ${s.bet_btn}`}>
+      <div className={`${isActive.state ? s[isState] : ''} ${s.btn}`}>{isActive.state ? <p>{patt[isState]}</p> : <p>СТАВКА</p>}</div>
+    </button>
+  );
+};
+
+export default First;

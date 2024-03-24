@@ -1,0 +1,20 @@
+.admin {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px;
+    border-radius: 5px;
+    gap: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.503);
+
+    textarea {
+        resize: none;
+    }
+}

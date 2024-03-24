@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from 'react';
+
+const First = ({
+  s,
+  isFinish,
+  first,
+  isActiveMain,
+  firstController,
+}: {
+  s: any;
+  isFinish: boolean;
+  first: string;
+  isActiveMain: boolean;
+  firstController: number;
+}) => {
+  const [isActive, setIsActive] = useState({ state: false, data: { patt: '', bet: '', sum: 1.0 } });
+  const [isState, setIsState] = useState<'otmena' | 'ojidanie' | 'game'>('ojidanie');
+  let patt = { otmena: 'Отмена', ojidanie: 'Ожидание', game: 'Забрать' };
+
+  useEffect(() => {
+    console.log(isActiveMain);
+    if (!isActiveMain) {
+      // ? есть экран загрузки и игра закончена
+      if (isActive.state) {
+        if (isState === 'game') {
+          setIsActive(prev => {
+            return {
+              ...prev,
+              state: false,
+            };
+          });
+        }
+        console.log('Ожидание');
+        setIsState('ojidanie');
+      }
+    } else {
+      // ? Если экран загрузки закрыт и игра началась
+      if (isActive.state) {
+        // ? Если нажали
+        if (isState === 'ojidanie') {
+          // ? Если нажато когда загрузка
+          console.log('Игра началась, вы в ней учавствуете');
+          setIsState('game');
+        } else {
+          setIsState('otmena');
+          console.log('Отмена');
+        }
+      }
+    }
+  }, [isActiveMain, isActive]);
+
+  const handleClick = (patt: string, el: string, sum: number) => {
+    if (isState === 'ojidanie' && isActive.state) {
+      return false;
+    }
+    setIsActive(prev => {
+      return { state: !prev.state, data: { patt, bet: el, sum } };
+    });
+  };
+
+  return (
+    <button onClick={() => handleClick('bet1', first, firstController)} className={`${isActive.state ? s[isState] : ''} ${s.bet_btn}`}>
+      <div>{isActive.state ? <p>{patt[isState]}</p> : <p>СТАВКА</p>}</div>
+    </button>
+  );
+};
+
+export default First;

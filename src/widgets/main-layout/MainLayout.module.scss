@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.layout {
+    background-color: var(--document-bg);
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    // @media (max-width: 978px) {
+    //     display: grid;
+    //     width: 100%;
+    //     color: white;
+    //     grid-template-columns: 1fr max-content;
+    //     grid-template-rows: max-content;
+    //     background: rgb(21, 16, 40);
+    // }
+}
+
+.desctop {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    color: white;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: 100%;
+}
+
+.conte {
+    position: relative;
+    flex: 1;
+    display: grid;
+    grid-template:
+        "info info" 69px
+        "bets history" 56px
+        "bets canvas" 1fr
+        "bets make-bet" max-content / 332px 1fr;
+}
+
+@media (max-width: 978px) {
+
+    .conte,
+    .desctop,
+    .layout {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+}
+
+.footer {
+    position: relative;
+    z-index: 9999;
+    min-height: 45px;
+    width: 100%;
+    background-color: #090f1e;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+
+
+    a {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        margin: 5px 0;
+        gap: 2px;
+
+        color: white;
+        font-family: Inter;
+        font-size: 13px;
+
+        img {
+            max-width: 20px;
+            rotate: 180deg;
+        }
+    }
+
+    .popol {
+        height: 24px;
+        border-radius: 6px;
+        margin-left: 10px;
+        box-shadow: 0 6px 18px #0ea1514d;
+        background-image: linear-gradient(248deg, #009746 100%, #38c172 0%);
+        font-weight: 500;
+        font-family: Inter;
+        font-size: 12px;
+        color: white;
+        line-height: 18px;
+        letter-spacing: -.15px;
+        padding: 0 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: calc(50% - 57px);
+            width: 65px;
+            height: 92px;
+            animation: flare-2 5s infinite ease-in-out;
+            background-image: radial-gradient(19.58% 37.96% at 16.68% 41.55%, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 100%);
+            animation: animBtm 5s infinite ease-in-out;
+            
+        }
+    }
+
+    .menu {
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@keyframes animBtm {
+    0% {
+        transform: translate(-115%) rotate(-45deg);
+    }
+
+    20% {
+        transform: translate(140%) rotate(-45deg);
+    }
+
+    100% {
+        transform: translate(140%) rotate(-45deg);
+    }
+}
+
+.balance {
+    margin-left: auto;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+
+    span {
+        font-weight: 500;
+    }
+}
